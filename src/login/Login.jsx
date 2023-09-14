@@ -1,6 +1,7 @@
 import React from 'react'
 
-function Login() {
+function Login({ user, setUser }) {
+  console.log(user);
   return (
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -16,7 +17,7 @@ function Login() {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST">
+          <form className="space-y-6" action="/" method="POST">
             <div>
               <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
                 Email address
@@ -39,9 +40,9 @@ function Login() {
                   Password
                 </label>
                 <div className="text-sm">
-                  <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
+                  {/*<a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
                     Forgot password?
-                  </a>
+                  </a>*/}
                 </div>
               </div>
               <div className="mt-2">
@@ -64,10 +65,9 @@ function Login() {
                 Sign in
               </button>
             </div>
-          </form>
-
+          </form> 
           <p className="mt-10 text-center text-sm text-gray-500">
-            Not a member?{' '}           
+            Not a member?{' '}
           </p>
         </div>
       </div>

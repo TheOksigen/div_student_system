@@ -10,15 +10,15 @@ import {
   UserGroupIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Outlet } from 'react-router-dom'
 
 const navigation = [
-  { name: 'Dashboard', href: 'home', icon: HomeIcon, current: true },
-  { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
-  { name: 'Teams', href: '#', icon: UserGroupIcon, current: false },
-  { name: 'Directory', href: '#', icon: MagnifyingGlassCircleIcon, current: false },
-  { name: 'Announcements', href: '#', icon: MegaphoneIcon, current: false },
-  { name: 'Office Map', href: '#', icon: MapIcon, current: false },
+  { name: 'Dashboard', href: 'home', icon: HomeIcon, },
+  { name: 'Calendar', href: 'calendar', icon: CalendarIcon, },
+  { name: 'Teams', href: 'teams', icon: UserGroupIcon, },
+  { name: 'Directory', href: 'directory', icon: MagnifyingGlassCircleIcon, },
+  { name: 'Announcements', href: 'announcements', icon: MegaphoneIcon, },
+  { name: 'Office Map', href: 'map', icon: MapIcon, },
 ]
 
 function classNames(...classes) {
@@ -27,9 +27,16 @@ function classNames(...classes) {
 
 export default function Layout() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [currentItem, setCurrentItem] = useState(null);
+
+  const handleNavItemClick = (item) => {
+    setCurrentItem(item);
+  };
+
+
 
   return (
-    <>     
+    <>
       <div className="flex h-full">
         {/* for mobile */}
         <Transition.Root show={sidebarOpen} as={Fragment}>
@@ -118,15 +125,15 @@ export default function Layout() {
                         <div>
                           <img
                             className="inline-block h-10 w-10 rounded-full"
-                            src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80"
+                            src="https://bazametrov.ru/uploads/new-agency/default_logo_user.jpg"
                             alt=""
                           />
                         </div>
                         <div className="ml-3">
                           <p className="text-base font-medium text-gray-700 group-hover:text-gray-900">
-                            Whitney Francis
+                            David Mammedov
                           </p>
-                          <p className="text-sm font-medium text-gray-500 group-hover:text-gray-700">View profile</p>
+                          <p className="text-sm font-medium text-gray-500 group-hover:text-gray-700">Front End Telebe</p>
                         </div>
                       </div>
                     </a>
@@ -159,8 +166,9 @@ export default function Layout() {
                       <NavLink
                         key={item.name}
                         to={item.href}
+                        onClick={() => handleNavItemClick(item)}
                         className={classNames(
-                          item.current
+                          currentItem === item
                             ? 'bg-gray-200 text-gray-900'
                             : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
                           'group flex items-center px-2 py-2 text-sm font-medium rounded-md'
@@ -185,13 +193,13 @@ export default function Layout() {
                     <div>
                       <img
                         className="inline-block h-9 w-9 rounded-full"
-                        src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80"
+                        src="https://bazametrov.ru/uploads/new-agency/default_logo_user.jpg"
                         alt=""
                       />
                     </div>
                     <div className="ml-3">
-                      <p className="text-sm font-medium text-gray-700 group-hover:text-gray-900">Whitney Francis</p>
-                      <p className="text-xs font-medium text-gray-500 group-hover:text-gray-700">View profile</p>
+                      <p className="text-sm font-medium text-gray-700 group-hover:text-gray-900">David Mammedov</p>
+                      <p className="text-xs font-medium text-gray-500 group-hover:text-gray-700">Front End Telebe</p>
                     </div>
                   </div>
                 </a>
@@ -223,19 +231,10 @@ export default function Layout() {
           </div>
           <div className="relative z-0 flex flex-1 overflow-hidden">
             <main className="relative z-0 flex-1 overflow-y-auto focus:outline-none">
-              {/* Start main area*/}1
               <div className="absolute inset-0 py-6 px-4 sm:px-6 lg:px-8">
-                <div className="h-full rounded-lg border-2 border-dashed border-gray-200" />
+                <Outlet />
               </div>
-              {/* End main area */}2
             </main>
-            <aside className="relative hidden w-96 flex-shrink-0 overflow-y-auto border-l border-gray-200 xl:flex xl:flex-col">
-              {/* Start secondary column (hidden on smaller screens) */}3
-              <div className="absolute inset-0 py-6 px-4 sm:px-6 lg:px-8">
-                <div className="h-full rounded-lg border-2 border-dashed border-gray-200" />
-              </div>
-              {/* End secondary column */}4
-            </aside>
           </div>
         </div>
       </div>
