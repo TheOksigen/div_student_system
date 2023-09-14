@@ -10,9 +10,10 @@ import {
   UserGroupIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline'
+import { NavLink } from 'react-router-dom'
 
 const navigation = [
-  { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
+  { name: 'Dashboard', href: 'home', icon: HomeIcon, current: true },
   { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
   { name: 'Teams', href: '#', icon: UserGroupIcon, current: false },
   { name: 'Directory', href: '#', icon: MagnifyingGlassCircleIcon, current: false },
@@ -88,9 +89,9 @@ export default function Layout() {
                     <nav aria-label="Sidebar" className="mt-5">
                       <div className="space-y-1 px-2">
                         {navigation.map((item) => (
-                          <a
+                          <NavLink
                             key={item.name}
-                            href={item.href}
+                            to={item.href}
                             className={classNames(
                               item.current
                                 ? 'bg-gray-100 text-gray-900'
@@ -106,7 +107,7 @@ export default function Layout() {
                               aria-hidden="true"
                             />
                             {item.name}
-                          </a>
+                          </NavLink>
                         ))}
                       </div>
                     </nav>
@@ -155,7 +156,7 @@ export default function Layout() {
                 <nav className="mt-5 flex-1" aria-label="Sidebar">
                   <div className="space-y-1 px-2">
                     {navigation.map((item) => (
-                      <a
+                      <NavLink
                         key={item.name}
                         to={item.href}
                         className={classNames(
@@ -173,7 +174,7 @@ export default function Layout() {
                           aria-hidden="true"
                         />
                         {item.name}
-                      </a>
+                      </NavLink>
                     ))}
                   </div>
                 </nav>
