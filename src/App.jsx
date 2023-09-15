@@ -1,8 +1,5 @@
 import React, { useState } from 'react'
 import { Outlet, useRoutes } from 'react-router-dom'
-
-
-import Layout from './components/Layout'
 import Home from './components/Home'
 import Calendar from './components/Calendar'
 import Teams from './components/Teams'
@@ -14,6 +11,7 @@ import Login from './login/Login'
 import Layoutcopy from './components/Layoutcopy'
 
 function App() {
+
   const [user, SetUser] = useState(false)
   const content = [user, SetUser]
   //auth.setuser(true)

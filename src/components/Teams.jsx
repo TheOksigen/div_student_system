@@ -3,23 +3,27 @@ import { Space, Table, Tag } from 'antd';
 const columns = [
   {
     title: 'Name',
+    responsive: ["xs"],
     dataIndex: 'name',
     key: 'name',
     render: (text) => <a>{text}</a>,
   },
   {
     title: 'Age',
+    responsive: ["xs"],
     dataIndex: 'age',
     key: 'age',
   },
   {
     title: 'Address',
+    responsive: ["xs"],
     dataIndex: 'address',
     key: 'address',
   },
   {
     title: 'Tags',
     key: 'tags',
+    responsive: ["xs"],
     dataIndex: 'tags',
     render: (_, { tags }) => (
       <>
@@ -71,5 +75,5 @@ const data = [
     tags: ['cool', 'mentor'],
   },
 ];
-const Team = () => <Table columns={columns} dataSource={data} />;
+const Team = () => <Table columns={columns} dataSource={data}  />;
 export default Team;

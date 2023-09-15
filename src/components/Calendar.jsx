@@ -62,6 +62,7 @@ const getListData = (value) => {
       ];
       break;
     default:
+      listData = []
   }
   return listData || [];
 };
@@ -84,9 +85,9 @@ const Calendarr = () => {
     const listData = getListData(value);
     return (
       <ul className="events">
-        {listData.map((item) => (
-          <li key={item.content}>
-            <Badge status={item.type} text={item.content} />
+        {listData.map((item,i) => (
+          <li key={i}>
+            <Badge status={item?.type} text={item?.content} />
           </li>
         ))}
       </ul>

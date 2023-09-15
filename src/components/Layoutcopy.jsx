@@ -20,10 +20,10 @@ const Layoutcopy = () => {
   const { token: { colorBgContainer }, } = theme.useToken();
 
   return (
-    <Layout className='h-full'>
+    <Layout className='min-h-full'>
       <Sider trigger={null} collapsible collapsed={!collapsed}>
         <Button type="text" icon={collapsed ? <MenuUnfoldOutlined className='text-white' /> : <MenuFoldOutlined className='text-white' />} onClick={() => setCollapsed(!collapsed)} className='h-16 !w-full text-base m-auto' />
-        <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
+        <Menu theme="dark" mode="inline" defaultSelectedKeys={['0']}>
           {navigation.map((item, index) => (
             <Menu.Item key={index} icon={item.icon}>
               <Link key={index} to={item.href}>{item.name}</Link>
