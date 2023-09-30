@@ -13,7 +13,7 @@ import Error from './components/Error,'
 
 function App() {
 
-  const [user, SetUser] = useState(false)
+  const [user, SetUser] = useState(true)
   const content = [user, SetUser]
   //useNavigate("/login")
 

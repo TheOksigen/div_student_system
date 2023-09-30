@@ -9,11 +9,15 @@ const getListData = (value) => {
       listData = [
         {
           type: 'warning',
-          content: 'Tutaqki burda front dersi var',
+          content: 'FE - 118',
         },
         {
           type: 'success',
-          content: 'Burdada nese',
+          content: 'Narinci',
+        },
+        {
+          type: 'success',
+          content: '19:00 - 20:30',
         },
       ];
       break;
