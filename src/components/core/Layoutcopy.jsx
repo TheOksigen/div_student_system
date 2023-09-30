@@ -27,6 +27,7 @@ const Layoutcopy = () => {
           {navigation.map((item, index) => (
             <Menu.Item key={index} icon={item.icon}>
               <Link key={index} to={item.href}>{item.name}</Link>
+              
             </Menu.Item>
           ))}
         </Menu>
