@@ -6,7 +6,8 @@ import Teams from './components/Teams'
 import Directory from './components/Directory'
 import Announcements from './components/Announcements'
 import Map from './components/Map'
-
+import Grouptable from './components/Grouptable'
+import "./output.css"
 import Login from './login/Login'
 import Layoutcopy from './components/core/Layoutcopy'
 import Error from './components/Error,'
@@ -21,7 +22,7 @@ function App() {
     return useRoutes([
       {
         path: "/",
-        element: (<Login content={content}/>)
+        element: (<Login content={content} />)
       }
     ])
   } else {
@@ -31,7 +32,8 @@ function App() {
         element: (<Layoutcopy />),
         children: [
           { path: "home", element: <Home /> },
-          { path: "calendar", element: <Calendar /> },
+          { path: "calendar", element: <Calendar />, },
+          { path: "calendar/group_table", element: <Grouptable /> },
           { path: "teams", element: <Teams /> },
           { path: "directory", element: <Directory /> },
           { path: "announcements", element: <Announcements /> },

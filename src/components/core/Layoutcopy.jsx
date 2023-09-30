@@ -20,7 +20,7 @@ const Layoutcopy = () => {
   const { token: { colorBgContainer }, } = theme.useToken();
 
   return (
-    <Layout className='h-full'>
+    <Layout className='min-h-screen'>
       <Sider trigger={null} collapsible collapsed={!collapsed}>
         <Button type="text" icon={collapsed ? <MenuUnfoldOutlined className='text-white' /> : <MenuFoldOutlined className='text-white' />} onClick={() => setCollapsed(!collapsed)} className='h-16 !w-full text-base m-auto' />
         <Menu theme="dark" mode="inline" defaultSelectedKeys={['0']}>
