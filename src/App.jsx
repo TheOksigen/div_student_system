@@ -13,7 +13,7 @@ import Layoutcopy from './components/core/Layoutcopy'
 import Error from './components/Error,'
 
 function App() {
-
+  console.log();
   const [user, SetUser] = useState(true)
   const content = [user, SetUser]
   //useNavigate("/login")
