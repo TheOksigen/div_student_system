@@ -50,16 +50,18 @@
 import React, { useEffect, useState } from 'react';
 import FullCalendar from '@fullcalendar/react';
 import timeGridWeek from '@fullcalendar/timegrid';
+import { useNavigate } from 'react-router-dom';
 
 function Calendar() {
+  const navigate = useNavigate()
   const [events, setEvents] = useState([]);
 
   const eventler = [
     {
       id: 'a',
       title: 'FE-119',
-      start: "2023-10-02T13:20:21.143Z",
-      end: "2023-10-02T15:20:21.143Z",
+      start: "2023-10-12T13:20:21.143Z",
+      end: "2023-10-12T15:20:21.143Z",
     }
   ];
 
@@ -79,17 +81,20 @@ function Calendar() {
           center: 'title',
           right: 'timeGridWeek,timeGridDay',
         }}
-        eventClick={() => console.log("Event clicked")}
+        eventClick={() => {
+          console.log("Event clicked")
+          navigate("group_table")
+        }
+        }
         events={events}
         eventtimeZone='local'
-        eventTimeFormat=
-        eventTimeFormat={{
-          month: 'long',
-          year: 'numeric',
-          day: 'numeric',
-          weekday: 'long',
-          hour12: false
-        }}
+      //eventTimeFormat={{
+      //  month: 'long',
+      //  year: 'numeric',
+      //  day: 'numeric',
+      //  weekday: 'long',
+      //  hour12: false
+      //}}
       />
     </div>
   );
