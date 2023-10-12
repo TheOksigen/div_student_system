@@ -1,21 +1,24 @@
 import React from 'react';
-import { Table, Radio, Checkbox } from 'antd';
+import { Table, Radio, Checkbox, Avatar, InputNumber } from 'antd';
 
 const columns = [
   {
     title: 'ID',
     dataIndex: 'id',
     key: 'id',
-    width: '10%',
-    sorter: (a, b) => a.id - b.id,
+    width: '3%',
   },
+
   {
-    title: 'Ad Soyad', 
+    title: 'Ad Soyad',
     dataIndex: 'fullName',
     key: 'fullName',
     width: '20%',
-    render: (_, record) => `${record.name} (${record.username})`,
-    sorter: (a, b) => `${a.name} (${a.username})`.localeCompare(`${b.name} (${b.username})`), 
+    render: (_, record) => (
+      <span>
+        <Avatar src={record.avatar} />   {record.name} ({record.username})
+      </span>
+    ),
   },
   {
     title: 'İştirak',
@@ -37,37 +40,68 @@ const columns = [
     render: (_, record) => <Checkbox defaultChecked={record.checkbox} />,
     width: '10%',
   },
+  {
+    title: 'Ev taskı',
+    dataIndex: 'inputRange',
+    key: 'inputRange',
+    width: '15%',
+    render: (_, record) => (
+      <InputNumber
+        min={1}
+        max={10}
+        defaultValue={1}
+        className='w-50'
+      />
+    ),
+  },
+  {
+    title: 'Mentor taskı',
+    dataIndex: 'inputRange',
+    key: 'inputRange',
+    width: '15%',
+    render: (_, record) => (
+      <InputNumber
+        min={1}
+        max={10}
+        defaultValue={1}
+        className='w-50'
+      />
+    ),
+  },
 ];
 
 const data = [
   {
     key: '1',
     id: 1,
-    name: 'John',
-    username: 'john.brown',
+    name: 'david mammedov',
+    username: 'david@div.edu.az',
     radioGroup: 'A',
     checkbox: true,
+    avatar: 'URL_TO_IMAGE_1', 
   },
   {
     key: '2',
     id: 2,
-    name: 'Jim',
-    username: 'jim.green',
+    name: 'david mammedov',
+    username: 'david@div.edu.az',
     radioGroup: 'B',
     checkbox: false,
+    avatar: 'URL_TO_IMAGE_2', 
   },
   {
     key: '3',
     id: 3,
-    name: 'Joe',
-    username: 'joe.black',
+    name: 'david mammedov',
+    username: 'david@div.edu.az',
     radioGroup: 'C',
     checkbox: true,
+    avatar: 'URL_TO_IMAGE_3', 
   },
 ];
 
-const onChange = (pagination, sorter, extra) => {
-  console.log('params', pagination, sorter, extra);
+const onChange = (pagination, extra) => {
+  console.log('params', pagination, extra);
 };
 
 const Grouptable = () => (
