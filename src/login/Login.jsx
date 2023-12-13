@@ -1,23 +1,42 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
+//import { useMutation, useQuery } from '@reduxjs/toolkit/dist/query';
+import { authApi } from '../store/apis/auth';
 
-function Login({ content }) {
-  const [login, setLogin] = useState("")
-  const [pass, setPass] = useState("")
-  const [user, setUser] = content
-  
-  function LoginState()  {
-    if (login == "david@div.edu.az" && pass == "123123") {
-      setUser(true)
+function Login() {
+  const [login, setLogin] = useState("");
+  const [pass, setPass] = useState("");
+
+  const dispatch = useDispatch()
+  const [loginUser, { isLoading: error }] = useMutation(authApi.endpoints.login)
+
+  const { data: serProfile, isLoading: profileLoading } = useQuery(
+    authApi.endpoints.getUserProfile
+  );
+
+  const handleLogin = async (credentials) => {
+    try {
+      const result = await loginUser(credentials).unwrap();
+
+    } catch (error) {
+      console.log(error);
     }
-    else console.log("yalnis parol");
-  }
-  
+  };
+  //const [user, setUser] = content
+
+  //function LoginState()  {
+  //  if (login == "david@div.edu.az" && pass == "123123") {
+  //    setUser(false)
+  //  }
+  //  else console.log("yalnis parol");
+  //}
 
 
   return (
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+          <button onClick={handleLogin}>OK</button>
           <img
             className="mx-auto h-10 w-auto"
             src="https://div.edu.az/img/logo-1.png?=1"
@@ -74,7 +93,6 @@ function Login({ content }) {
             <div>
               <button
                 type="submit"
-                onClick={LoginState()}
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Sign in

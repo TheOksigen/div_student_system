@@ -19,6 +19,8 @@
     "@fullcalendar/timegrid": "^6.1.9",
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
+    "@reduxjs/toolkit": "^2.0.1",
+    "@rtk-incubator/rtk-query": "^0.3.0",
     "antd": "^5.10.1",
     "antd-weekly-calendar": "^1.1.2",
     "date-fns": "^2.30.0",
@@ -28,6 +30,7 @@
     "react": "^18.2.0",
     "react-calendar": "^4.6.1",
     "react-dom": "^18.2.0",
+    "react-redux": "^9.0.4",
     "react-router-dom": "^6.16.0",
     "sort-by": "^1.2.0"
   },

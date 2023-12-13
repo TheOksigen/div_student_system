@@ -4,10 +4,12 @@ import App from './App.jsx'
 //import "./input.css"
 import { BrowserRouter } from 'react-router-dom'
 import DataProvider from './service/DataContex.jsx'
+import { Provider } from 'react-redux'
+import { store } from './store/store.js'
 ReactDOM.createRoot(document.getElementById('root')).render(
-	<DataProvider>
+	<Provider store={store}>
 		<BrowserRouter>
 			<App />
 		</BrowserRouter>
-	</DataProvider>
+	</Provider>
 )

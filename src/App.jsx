@@ -11,18 +11,19 @@ import "./output.css"
 import Login from './login/Login'
 import Layoutcopy from './components/core/Layoutcopy'
 import Error from './components/Error,'
+import { useSelector } from 'react-redux'
 
 function App() {
-  console.log();
   const [user, SetUser] = useState(true)
   const content = [user, SetUser]
-  //useNavigate("/login")
+  const selector = useSelector((store) => console.log(store))
 
-  if (!user) {
+  if (user) {
+    useNavigate("/")
     return useRoutes([
       {
         path: "/",
-        element: (<Login content={content} />)
+        element: (<Login />)
       }
     ])
   } else {
@@ -41,7 +42,7 @@ function App() {
         ]
       },
       {
-        path: "/*",
+        path: "*",
         element: (<Error />)
       }
     ]
