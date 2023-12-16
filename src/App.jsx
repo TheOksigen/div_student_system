@@ -16,7 +16,7 @@ import { useSelector } from 'react-redux'
 function App() {
   const [user, SetUser] = useState(true)
   const content = [user, SetUser]
-  const selector = useSelector((store) => console.log(store))
+  //const selector = useSelector((store) => console.log(store))
 
   if (user) {
     useNavigate("/")

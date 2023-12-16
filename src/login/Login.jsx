@@ -1,42 +1,62 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
-//import { useMutation, useQuery } from '@reduxjs/toolkit/dist/query';
-import { authApi } from '../store/apis/auth';
+import { useLoginMutation } from '../store/apis/auth';
+//import { useMutation, useQuery } from '@reduxjs/toolkit/react';
+//import { useMutation, useQuery } from '@reduxjs/toolkit/query/react';
+//import { useMutation } from '@reduxjs/toolkit/query/react';
+
+
+//import { authApi, useLoginMutation } from '../store/apis/auth';
 
 function Login() {
-  const [login, setLogin] = useState("");
-  const [pass, setPass] = useState("");
 
-  const dispatch = useDispatch()
-  const [loginUser, { isLoading: error }] = useMutation(authApi.endpoints.login)
+  const [login, setLogin] = useState({
+    "email": "",
+    "password": ""
+  })
 
-  const { data: serProfile, isLoading: profileLoading } = useQuery(
-    authApi.endpoints.getUserProfile
-  );
 
-  const handleLogin = async (credentials) => {
-    try {
-      const result = await loginUser(credentials).unwrap();
+  const handleInputChange = (e) => {
+    const { name, value } = e.target
+    setLogin((prevlogin) => ({
+      ...prevlogin,
+      [name]: value
+    }))
+  }
+  
+  const handleSubmit = () => {
+    console.log(useLoginMutation());
+    //const { login } = useLoginMutation()
+  }
 
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  //const [user, setUser] = content
-
-  //function LoginState()  {
-  //  if (login == "david@div.edu.az" && pass == "123123") {
-  //    setUser(false)
-  //  }
-  //  else console.log("yalnis parol");
+  //const handleSubmit = async () => {
+  //  await user(login)
+  //  //console.log(login);
   //}
+
+
+  //const dispatch = useDispatch()
+  //const { data: serProfile, isLoading: profileLoading } = useQuery(
+  //  authApi.endpoints.getUserProfile
+  //);
+
+  //const [loginUser, { isLoading: error }] = useMutation(authApi.endpoints.login)
+
+
+  //const handleLogin = async (credentials) => {
+  //  try {
+  //    const result = await loginUser(credentials).unwrap();
+
+  //  } catch (error) {
+  //    console.log(error);
+  //  }
+  //};
 
 
   return (
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <button onClick={handleLogin}>OK</button>
           <img
             className="mx-auto h-10 w-auto"
             src="https://div.edu.az/img/logo-1.png?=1"
@@ -55,11 +75,11 @@ function Login() {
               </label>
               <div className="mt-2">
                 <input
-                  id="email"
+                  type="text"
+                  placeholder="Email"
                   name="email"
-                  type="email"
-                  autoComplete="email"
-                  onChange={(e) => setLogin(e.target.value)}
+                  value={login.email}
+                  onChange={handleInputChange}
                   required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
@@ -79,12 +99,11 @@ function Login() {
               </div>
               <div className="mt-2">
                 <input
-                  id="password"
-                  name="password"
                   type="password"
-                  autoComplete="current-password"
-                  required
-                  onChange={(e) => setPass(e.target.value)}
+                  placeholder="Password"
+                  name="password"
+                  value={login.password}
+                  onChange={handleInputChange}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -93,6 +112,7 @@ function Login() {
             <div>
               <button
                 type="submit"
+                onClick={handleSubmit}
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Sign in
