@@ -1,15 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { useLoginMutation } from '../store/apis/auth';
-//import { useMutation, useQuery } from '@reduxjs/toolkit/react';
-//import { useMutation, useQuery } from '@reduxjs/toolkit/query/react';
-//import { useMutation } from '@reduxjs/toolkit/query/react';
 
-
-//import { authApi, useLoginMutation } from '../store/apis/auth';
 
 function Login() {
-
+  const [logRequest,loginData] = useLoginMutation()
   const [login, setLogin] = useState({
     "email": "",
     "password": ""
@@ -24,11 +19,12 @@ function Login() {
     }))
   }
   
-  const handleSubmit = () => {
-    console.log(useLoginMutation());
-    //const { login } = useLoginMutation()
+  const handleSubmit = (e) => {
+    e.preventDefault()
+     logRequest(login)
+    
   }
-
+  useEffect(()=>console.log(loginData),[loginData])
   //const handleSubmit = async () => {
   //  await user(login)
   //  //console.log(login);
