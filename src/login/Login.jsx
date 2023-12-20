@@ -1,30 +1,55 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { useLoginMutation } from '../store/apis/auth';
+import { setAccessToken, setisAuthenticated } from '../store/slices/auth-slices';
+import { useCookies } from 'react-cookie';
 
 
 function Login() {
-  const [logRequest,loginData] = useLoginMutation()
+  const [logRequest, loginData] = useLoginMutation()
   const [login, setLogin] = useState({
-    "email": "",
-    "password": ""
+    "email": "api@div.edu.az",
+    "password": "ucvlqcq8"
   })
 
-
+console.log(loginData);
   const handleInputChange = (e) => {
     const { name, value } = e.target
     setLogin((prevlogin) => ({
       ...prevlogin,
       [name]: value
     }))
+    console.log(login);
   }
-  
+
   const handleSubmit = (e) => {
     e.preventDefault()
-     logRequest(login)
-    
+    logRequest(login)
+
   }
-  useEffect(()=>console.log(loginData),[loginData])
+
+  const dispatch = useDispatch()
+  const [cookie, setCookie] = useCookies(['access_token'])
+
+  useEffect(() => {
+    if (loginData.isSuccess && loginData.data && loginData.data.access_token) {
+
+      dispatch(setAccessToken(loginData.data.access_token));
+      dispatch(setisAuthenticated(loginData.isSuccess));
+      
+      const expirationDate = new Date(Date.now() + 10 * 365 * 24 * 60 * 60 * 1000);
+      
+      setCookie("access_token", loginData.data.access_token, {
+        expires: expirationDate,
+        path: '/', secure: true,
+        sameSite: 'strict'
+      })
+      console.log(document.cookie);
+
+    }
+
+  }, [loginData.isSuccess, loginData.data, dispatch]);
+  //useEffect(() => console.log(loginData), [loginData])
   //const handleSubmit = async () => {
   //  await user(login)
   //  //console.log(login);
