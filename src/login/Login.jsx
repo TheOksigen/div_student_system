@@ -1,53 +1,54 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux';
-import { useLoginMutation } from '../store/apis/auth';
-import { setAccessToken, setisAuthenticated } from '../store/slices/auth-slices';
-import { useCookies } from 'react-cookie';
-
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useLoginMutation } from "../store/apis/auth";
+import {
+  setAccessToken,
+  setisAuthenticated,
+} from "../store/slices/auth-slices";
+import { useCookies } from "react-cookie";
 
 function Login() {
-  const [logRequest, loginData] = useLoginMutation()
+  const [logRequest, loginData] = useLoginMutation();
   const [login, setLogin] = useState({
-    "email": "api@div.edu.az",
-    "password": "ucvlqcq8"
-  })
+    email: "api@div.edu.az",
+    password: "ucvlqcq8",
+  });
 
-console.log(loginData);
+  // console.log(loginData);
   const handleInputChange = (e) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
     setLogin((prevlogin) => ({
       ...prevlogin,
-      [name]: value
-    }))
-    console.log(login);
-  }
+      [name]: value,
+    }));
+    // console.log(login);
+  };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    logRequest(login)
+    e.preventDefault();
+    logRequest(login);
+  };
 
-  }
-
-  const dispatch = useDispatch()
-  const [cookie, setCookie] = useCookies(['access_token'])
+  const dispatch = useDispatch();
+  const [cookie, setCookie] = useCookies(["access_token"]);
 
   useEffect(() => {
     if (loginData.isSuccess && loginData.data && loginData.data.access_token) {
-
       dispatch(setAccessToken(loginData.data.access_token));
       dispatch(setisAuthenticated(loginData.isSuccess));
-      
-      const expirationDate = new Date(Date.now() + 10 * 365 * 24 * 60 * 60 * 1000);
-      
+
+      const expirationDate = new Date(
+        Date.now() + 10 * 365 * 24 * 60 * 60 * 1000
+      );
+
       setCookie("access_token", loginData.data.access_token, {
         expires: expirationDate,
-        path: '/', secure: true,
-        sameSite: 'strict'
-      })
-      console.log(document.cookie);
-
+        path: "/",
+        secure: true,
+        sameSite: "strict",
+      });
+      // console.log(document.cookie);
     }
-
   }, [loginData.isSuccess, loginData.data, dispatch]);
   //useEffect(() => console.log(loginData), [loginData])
   //const handleSubmit = async () => {
@@ -55,14 +56,12 @@ console.log(loginData);
   //  //console.log(login);
   //}
 
-
   //const dispatch = useDispatch()
   //const { data: serProfile, isLoading: profileLoading } = useQuery(
   //  authApi.endpoints.getUserProfile
   //);
 
   //const [loginUser, { isLoading: error }] = useMutation(authApi.endpoints.login)
-
 
   //const handleLogin = async (credentials) => {
   //  try {
@@ -72,7 +71,6 @@ console.log(loginData);
   //    console.log(error);
   //  }
   //};
-
 
   return (
     <>
@@ -91,7 +89,10 @@ console.log(loginData);
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <div className="space-y-6">
             <div>
-              <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
                 Email address
               </label>
               <div className="mt-2">
@@ -109,7 +110,10 @@ console.log(loginData);
 
             <div>
               <div className="flex items-center justify-between">
-                <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium leading-6 text-gray-900"
+                >
                   Password
                 </label>
                 <div className="text-sm">
@@ -141,12 +145,12 @@ console.log(loginData);
             </div>
           </div>
           <p className="mt-10 text-center text-sm text-gray-500">
-            Not a member?{' '}
+            Not a member?
           </p>
         </div>
       </div>
     </>
-  )
+  );
 }
 
-export default Login
+export default Login;
